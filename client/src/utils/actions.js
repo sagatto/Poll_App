@@ -1,5 +1,6 @@
-export const ADD_POLL = "ADD_POLL";
-export const DELETE_POLL = 'DELETE_POLL';
-export const CAST_VOTE = "CAST_VOTE";
-export const VOTE_COUNT = 'VOTE_COUNT';
-export const CLEAR_POLL = 'CLEAR_POLL';
+// Update list of polls
+export const UPDATE_POLLS = "UPDATE_POLLS";
+// Current poll selected by user from all polls
+export const SELECTED_POLL = "SELECTED_POLL";
+// Create new poll
+export const CREATE_POLL = "CREATE_POLL";

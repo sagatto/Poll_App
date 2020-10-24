@@ -1,3 +1,5 @@
+// Placeholder code from shop-shop APP
+/*
 import gql from 'graphql-tag';
 
 export const QUERY_PRODUCTS = gql`
@@ -60,3 +62,4 @@ export const QUERY_USER = gql`
   }
 }
 `;
+*/
