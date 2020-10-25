@@ -6,20 +6,12 @@ const typeDefs = gql`
     name: String
   }
 
-  type Product {
+  type Poll {
     _id: ID
-    name: String
-    description: String
-    image: String
-    quantity: Int
-    price: Float
+    question: String
+    vote: Enum
+    count: Int
     category: Category
-  }
-
-  type Order {
-    _id: ID
-    purchaseDate: String
-    products: [Product]
   }
 
   type User {
@@ -27,7 +19,7 @@ const typeDefs = gql`
     firstName: String
     lastName: String
     email: String
-    orders: [Order]
+    poll: [Poll]
   }
 
   type Auth {
@@ -36,20 +28,21 @@ const typeDefs = gql`
   }
 
   type Query {
-    categories: [Category]
-    products(category: ID, name: String): [Product]
-    product(_id: ID!): Product
     user: User
-    order(_id: ID!): Order
+    poll: [Poll]
   }
 
-  type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
-    login(email: String!, password: String!): Auth
+  type Query {
+    poll: ID
   }
+
+#   type Mutation {
+#     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+#     addPoll(products: [ID]!): Order
+#     updateUser(firstName: String, lastName: String, email: String, password: String): User
+#     updatePoll(_id: ID!, quantity: Int!): Product
+#     login(email: String!, password: String!): Auth
+#   }
 `;
 
 module.exports = typeDefs;
