@@ -1,10 +1,9 @@
 const { Schema, model } = require('mongoose');
-const reactionSchema = require('./Reaction');
 const dateFormat = require('../utils/dateFormat');
 
-const poll = new Schema(
+const pollSchema = new Schema(
   {
-    pollText: {
+    question: {
       type: String,
       required: 'You need to leave a thought!',
       minlength: 1,
@@ -15,11 +14,21 @@ const poll = new Schema(
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
     },
-    username: {
+    firstname: {
       type: String,
       required: true
     },
-    reactions: [reactionSchema]
+    lastname: {
+      type: String,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    count: {
+      type: Int
+    }
   },
   {
     toJSON: {
@@ -28,10 +37,7 @@ const poll = new Schema(
   }
 );
 
-thoughtSchema.virtual('reactionCount').get(function() {
-  return this.reactions.length;
-});
 
-const Thought = model('Thought', thoughtSchema);
+const Poll = mongoose.model('Poll', pollSchema);
 
-module.exports = Thought;
+module.exports = Poll;
