@@ -15,7 +15,7 @@ import {
   export default function CreateQuestion() {
     return (
       <Flex width="full" align="center" justifyContent="center">
-        <Box p={8} maxWidth="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
+        <Box p={8} maxWidth="80%" borderWidth={1} borderRadius={8} boxShadow="lg">
           <Box textAlign="center">
             <Heading>Post a Question for the CEO</Heading>
           </Box>

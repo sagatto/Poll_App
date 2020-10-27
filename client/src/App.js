@@ -24,7 +24,7 @@ export default function App() {
         <CSSReset />
         <ThemeToggler />
 
-        <Login />
+        <CreateQuestion />
 
       </ColorModeProvider>
     </ThemeProvider>
