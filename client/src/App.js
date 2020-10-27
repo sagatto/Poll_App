@@ -1,4 +1,7 @@
 import React from 'react';
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { ApolloProvider } from "@apollo/react-hooks";
+// import ApolloClient from "apollo-boost";
 import {
   ThemeProvider,
   theme,
@@ -6,8 +9,12 @@ import {
   CSSReset
 } from '@chakra-ui/core';
 
+
 import ThemeToggler from './components/ThemeToggler';
-import LoginForm from './pages/Login';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import ViewQuestions from './pages/ViewQuestions';
+import CreateQuestion from './pages/CreateQuestion';
 
 
 export default function App() {
@@ -16,7 +23,9 @@ export default function App() {
       <ColorModeProvider>
         <CSSReset />
         <ThemeToggler />
-        <LoginForm />
+
+        <Login />
+
       </ColorModeProvider>
     </ThemeProvider>
   );
