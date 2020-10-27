@@ -21,7 +21,7 @@ import {
           <Box my={4} textAlign="left">
             <form>
               <FormControl>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Sign Up</FormLabel>
                 <Input type="email" placeholder="test@test.com" />
               </FormControl>
               <FormControl mt={6}>
@@ -29,7 +29,7 @@ import {
                 <Input type="password" placeholder="*******" />
               </FormControl>
               <Button type="submit" variantColor="purple" variant="outline" width="full" mt={4}>
-                Start Swimming
+                Create Account
               </Button>
             </form>
           </Box>
