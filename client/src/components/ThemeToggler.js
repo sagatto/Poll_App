@@ -5,14 +5,15 @@ export default function ThemeToggler() {
     const { colorMode, toggleColorMode } = useColorMode();
     return (
       <Box textAlign="right" py={4} mr={12}>
-        <Link variant="ghost" link="/"> Dory </Link>
-        <Link variant="ghost" href="/createquestion" width="20%"> Question </Link>
-        <Link variant="ghost" href="/login" > Login </Link>
-        <Link variant="ghost" href="/signup">SignUp</Link>
+        <Link margin="2px" fontWeight="semibold" href="/"> Dory </Link>
+        <Link margin="2px" fontWeight="semibold" href="/createquestion"> Question </Link>
+        <Link margin="2px" fontWeight="semibold" href="/login" > Login </Link>
+        <Link margin="2px" fontWeight="semibold" href="/signup">SignUp</Link>
         <IconButton
           icon={colorMode === 'light' ? 'moon' : 'sun'}
           onClick={toggleColorMode}
           variant="ghost"
+          fontWeight="semibold"
           margin="2px"
         />
       </Box>
