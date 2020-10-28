@@ -11,7 +11,7 @@ import {
 
   
 
-  export default function Signup() {
+ function Signup() {
     return (
       <Flex width="full" align="center" justifyContent="center">
         <Box p={8} maxWidth="500px" borderWidth={1} borderRadius={8} boxShadow="lg">
@@ -37,3 +37,5 @@ import {
       </Flex>
     );
   }
+
+  export default Signup;

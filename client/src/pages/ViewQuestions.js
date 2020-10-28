@@ -12,7 +12,7 @@ import {
 
   
 
-  export default function ViewQuestions() {
+function ViewQuestions() {
     return (
       <Flex width="full" align="center" justifyContent="center">
         <Box p={8} maxWidth="80%">
@@ -91,3 +91,6 @@ import {
       </Flex>
     );
   }
+
+
+  export default ViewQuestions;
