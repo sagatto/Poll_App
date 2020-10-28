@@ -1,25 +1,18 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-  type Category {
-    _id: ID
-    name: String
-  }
 
   type Poll {
     _id: ID
     question: String
-    vote: Enum
     count: Int
-    category: Category
   }
 
   type User {
     _id: ID
-    firstName: String
-    lastName: String
+    username: String
     email: String
-    poll: [Poll]
+    polls: [Poll]
   }
 
   type Auth {
@@ -28,21 +21,20 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: User
-    poll: [Poll]
+    me: User
+    # users: [User]
+    polls: [Poll]
+    # user(username: String!): User
+    userVotedForPolls(username: String!): [Poll]
+    poll(_id: ID!): Poll
   }
-
-  type Query {
-    poll: ID
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    addPoll(question: String!): Poll
+    addUpVote(_id: ID!): Poll
+    addDownVote(_id: ID!): Poll
   }
-
-#   type Mutation {
-#     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-#     addPoll(products: [ID]!): Order
-#     updateUser(firstName: String, lastName: String, email: String, password: String): User
-#     updatePoll(_id: ID!, quantity: Int!): Product
-#     login(email: String!, password: String!): Auth
-#   }
 `;
 
 module.exports = typeDefs;

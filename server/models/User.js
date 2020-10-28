@@ -3,13 +3,7 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
   {
-    firstname: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true
-    },
-    lastname: {
+    username: {
       type: String,
       required: true,
       unique: true,
@@ -26,7 +20,7 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    poll: [
+    polls: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Poll'
