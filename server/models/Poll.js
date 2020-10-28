@@ -5,7 +5,7 @@ const pollSchema = new Schema(
   {
     question: {
       type: String,
-      required: 'You need to leave a thought!',
+      required: 'You need to leave a question!',
       minlength: 1,
       maxlength: 280
     },
@@ -14,20 +14,16 @@ const pollSchema = new Schema(
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
     },
-    firstname: {
-      type: String,
-      required: true
-    },
-    lastname: {
-      type: String,
-      required: true
-    },
-    email: {
-      type: String,
-      required: true
-    },
+    // username: {
+    //   type: String,
+    //   required: true
+    // },
+    // email: {
+    //   type: String,
+    //   required: true
+    // },
     count: {
-      type: Int
+      type: Number,
     }
   },
   {
@@ -38,6 +34,6 @@ const pollSchema = new Schema(
 );
 
 
-const Poll = mongoose.model('Poll', pollSchema);
+const Poll = model('Poll', pollSchema);
 
 module.exports = Poll;
