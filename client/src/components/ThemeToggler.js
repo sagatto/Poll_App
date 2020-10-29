@@ -1,17 +1,20 @@
 import React from 'react';
-import { useColorMode, Button, Box, IconButton } from '@chakra-ui/core';
+import { useColorMode, Button, Link, Box, IconButton } from '@chakra-ui/core';
 
 export default function ThemeToggler() {
     const { colorMode, toggleColorMode } = useColorMode();
     return (
       <Box textAlign="right" py={4} mr={12}>
-        <Button variant="ghost"> Dory </Button>
-        <Button variant="ghost"> Question </Button>
-        <Button variant="ghost"> Login </Button>
+        <Link margin="2px" fontWeight="semibold" href="/"> Dory </Link>
+        <Link margin="2px" fontWeight="semibold" href="/createquestion"> Question </Link>
+        <Link margin="2px" fontWeight="semibold" href="/login" > Login </Link>
+        <Link margin="2px" fontWeight="semibold" href="/signup">SignUp</Link>
         <IconButton
           icon={colorMode === 'light' ? 'moon' : 'sun'}
           onClick={toggleColorMode}
           variant="ghost"
+          fontWeight="semibold"
+          margin="2px"
         />
       </Box>
     );

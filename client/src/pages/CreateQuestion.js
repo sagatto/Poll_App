@@ -12,7 +12,7 @@ import {
 
   
 
-  export default function CreateQuestion() {
+function CreateQuestion() {
     return (
       <Flex width="full" align="center" justifyContent="center">
         <Box p={8} maxWidth="80%" borderWidth={1} borderRadius={8} boxShadow="lg">
@@ -34,3 +34,5 @@ import {
       </Flex>
     );
   }
+
+  export default CreateQuestion;
