@@ -1,88 +1,29 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order } = require('../models');
+const { User, Poll } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    me: async () => {
-      return await Category.find();
-    },
-    products: async (parent, { category, name }) => {
-      const params = {};
-
-      if (category) {
-        params.category = category;
+    // Find if user exists using email and returns if email is registered
+    userExist: async (parent, { email }) => {
+      const user = await User.findOne({ email });
+      if (!user) {
+        return false
+      } else {
+        return true
       }
-
-      if (name) {
-        params.name = {
-          $regex: name
-        };
-      }
-
-      return await Product.find(params).populate('category');
     },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate('category');
+    // Return full list of Polls from Poll table
+    allPolls: async () => {
+      return Poll.find(); 
     },
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-        return user;
-      }
-
-      throw new AuthenticationError('Not logged in');
-    },
-    order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        return user.orders.id(_id);
-      }
-
-      throw new AuthenticationError('Not logged in');
+    // Using user._id from context find list of polls they have voted on
+    pollsVotedOn: async (parent, args, context) => {
+      return await User.findById(context.user._id).populate(polls)
     }
   },
   Mutation: {
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
-      const token = signToken(user);
-
-      return { token, user };
-    },
-    addOrder: async (parent, { products }, context) => {
-      console.log(context);
-      if (context.user) {
-        const order = new Order({ products });
-
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-        return order;
-      }
-
-      throw new AuthenticationError('Not logged in');
-    },
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-      }
-
-      throw new AuthenticationError('Not logged in');
-    },
-    updateProduct: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
-
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-    },
+    // Authenticate user using email and password
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -99,7 +40,34 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+    // Add new user using args 
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+
+      return { token, user };
+    },
+    // Add a new poll using args
+    addPoll: async (parent, { question }) => {
+      return await Poll.create(question);
+    },
+    // Add vote using poll id if user hasn't voted
+    addUpVote: async (parent, {pollid}, context) => {
+      const pollList = await User.findById(context.user._id).populate(polls);
+
+      if(pollList) {
+        for(i=0; i < pollList.length; i++){
+          if(pollid == pollList[i]._id){
+            return 
+          }
+        }
+      }
+      /*
+      await User.findByIdAndUpdate()
+      await Poll.findByIdAndUpdate()
+      */
+    },
   }
 };
 

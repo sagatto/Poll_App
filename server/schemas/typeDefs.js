@@ -21,12 +21,11 @@ const typeDefs = gql`
   }
 
   type Query {
-    me: User
-    # users: [User]
-    polls: [Poll]
-    # user(username: String!): User
-    userVotedForPolls(username: String!): [Poll]
+    userExist(email: String!): Boolean
+    allPolls: [Poll]
+    pollsVotedOn: [Poll]
     poll(_id: ID!): Poll
+    user(_id: ID!): User
   }
   type Mutation {
     login(email: String!, password: String!): Auth

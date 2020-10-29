@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "poll app",
   "main": "server.js",
-
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon",

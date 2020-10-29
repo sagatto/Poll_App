@@ -14,14 +14,6 @@ const pollSchema = new Schema(
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
     },
-    // username: {
-    //   type: String,
-    //   required: true
-    // },
-    // email: {
-    //   type: String,
-    //   required: true
-    // },
     count: {
       type: Number,
     }
