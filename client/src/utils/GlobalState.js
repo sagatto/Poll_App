@@ -8,8 +8,8 @@ const StoreProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = usePollReducer({
         // Instantiate inital global state
         allPolls: [],
-        selectedPoll: {},
-        newPoll: {}
+        // selectedPoll: {},
+        // newPoll: {}
       });
     console.log(state);
     return <Provider value={[state, dispatch]} {...props} />;

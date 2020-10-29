@@ -1,9 +1,7 @@
-// Placeholder code from shop-shop APP
-/*
 import decode from 'jwt-decode';
-
 class AuthService {
   getProfile() {
+    console.log("frontend getprofile");
     return decode(this.getToken());
   }
 
@@ -43,6 +41,4 @@ class AuthService {
     window.location.assign('/');
   }
 }
-
 export default new AuthService();
-*/

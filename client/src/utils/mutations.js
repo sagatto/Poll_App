@@ -1,5 +1,3 @@
-// Placeholder code from shop-shop APP
-/*
 import gql from 'graphql-tag';
 
 export const LOGIN = gql`
@@ -12,30 +10,16 @@ export const LOGIN = gql`
     }
   }
 `;
-
-
-export const ADD_ORDER = gql`
-  mutation addOrder($products: [ID]!) {
-    addOrder(products: $products) {
-      purchaseDate
-      products {
-        _id
-      name
-      description
-      price
-      quantity
-      category {
-        name
-      } 
-      }
+export const ADD_POLL = gql`
+  mutation addPoll($question: String!) {
+    addPoll(question: $question) {
+      question 
     }
   }
 `;
-
-
 export const ADD_USER = gql`
-  mutation addUser($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
-    addUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+  mutation addUser($email: String!, $password: String!) {
+    addUser(email: $email, password: $password) {
       token
       user {
         _id
@@ -43,4 +27,3 @@ export const ADD_USER = gql`
     }
   }
 `;
-*/
