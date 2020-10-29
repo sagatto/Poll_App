@@ -11,7 +11,6 @@
     "seed": "cd server && npm run seed",
     "heroku-postbuild": "cd client && npm run build"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -23,7 +22,6 @@
     "mongoose": "^5.9.9",
     "if-env": "^1.0.4"
   },
-
   "devDependencies": {
     "concurrently": "^5.1.0"
   }
