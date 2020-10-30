@@ -46,11 +46,11 @@ function Login(props) {
             <form onSubmit={handleFormSubmit}>
               <FormControl>
                 <FormLabel>Email</FormLabel>
-                <Input type="email" placeholder="test@test.com" onChange={handleChange}/>
+                <Input name="email" type="email" placeholder="test@test.com" onChange={handleChange}/>
               </FormControl>
               <FormControl mt={6}>
                 <FormLabel>Password</FormLabel>
-                <Input type="password" placeholder="*******" onChange={handleChange}/>
+                <Input name="password" type="password" placeholder="*******" onChange={handleChange}/>
               </FormControl>
               {
                 error ? <Box>
