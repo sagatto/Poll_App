@@ -10,7 +10,6 @@ import {
   
 import React, { useState } from "react";
 import { useMutation } from '@apollo/react-hooks';
-import { Link } from "react-router-dom";
 import { LOGIN } from "../utils/mutations"
 import Auth from "../utils/auth";
 
@@ -44,13 +43,13 @@ function Login(props) {
           </Box>
           <Box my={4} textAlign="left">
             <form onSubmit={handleFormSubmit}>
-              <FormControl>
+              <FormControl isRequired>
                 <FormLabel>Email</FormLabel>
-                <Input name="email" type="email" placeholder="test@test.com" onChange={handleChange}/>
+                <Input name="email" type="email" placeholder="Email Address" onChange={handleChange}/>
               </FormControl>
-              <FormControl mt={6}>
+              <FormControl isRequired mt={6}>
                 <FormLabel>Password</FormLabel>
-                <Input name="password" type="password" placeholder="*******" onChange={handleChange}/>
+                <Input name="password" type="password" placeholder="Password" onChange={handleChange}/>
               </FormControl>
               {
                 error ? <Box>
