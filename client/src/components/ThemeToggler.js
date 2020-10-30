@@ -6,14 +6,18 @@ export default function ThemeToggler() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box textAlign="right" py={4} mr={12}>
-      <Link margin="2px" fontWeight="semibold" href="/">
-        Dory
-      </Link>
-      <Link margin="2px" fontWeight="semibold" href="/createquestion">
-        Question
-      </Link>
       {Auth.loggedIn() ? (
-        <Button onClick={() => Auth.logout()}>Logout</Button>
+        <div>
+          <Link margin="2px" fontWeight="semibold" href="/dory">
+            Dory
+          </Link>
+          <Link margin="2px" fontWeight="semibold" href="/createquestion">
+            Question
+          </Link>
+          <Button onClick={() => Auth.logout()} variant="ghost">
+            Logout
+          </Button>
+        </div>
       ) : (
         <div>
           <Link margin="2px" fontWeight="semibold" href="/login">

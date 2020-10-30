@@ -18,7 +18,6 @@ import {
 const client = new ApolloClient({
   request: (operation) => {
     const token = localStorage.getItem("id_token");
-    console.log("token app.js", token);
     operation.setContext({
       headers: {
         authorization: token ? `Bearer ${token}` : "",
@@ -37,9 +36,10 @@ function App() {
             <ColorModeProvider>
               <CSSReset />
               <ThemeToggler />
-              <Route exact path="/" component={ViewQuestions} />
+              <Route exact path="/" component={Login} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
+              <Route exact path="/dory" component={ViewQuestions} />
               <Route exact path="/createquestion" component={CreateQuestion} />
             </ColorModeProvider>
           </ThemeProvider>
