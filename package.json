@@ -15,11 +15,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server-express": "^2.18.2",
-    "bcrypt": "^4.0.1",
-    "express": "^4.17.1",
-    "faker": "^4.1.0",
-    "mongoose": "^5.9.9",
     "if-env": "^1.0.4"
   },
   "devDependencies": {
