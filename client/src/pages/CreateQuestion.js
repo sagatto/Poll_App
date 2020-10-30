@@ -13,7 +13,8 @@ import {
   Input,
   Button,
 } from "@chakra-ui/core";
-
+// Debug enable
+const debug = 1
 function CreateQuestion() {
   const [formState, setFormState] = useState({ question: "" });
   const [addPoll] = useMutation(ADD_POLL);
@@ -24,13 +25,18 @@ function CreateQuestion() {
       const mutationResponse = await addPoll({
         variables: { question: formState.question },
       });
-      const token = mutationResponse.data.login.token;
-      Auth.login(token);
     } catch (e) {
       console.log(e);
     }
   };
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
   return (
     <Flex width="full" align="center" justifyContent="center">
       <Box p={8} maxWidth="80%" borderWidth={1} borderRadius={8} boxShadow="lg">
@@ -47,6 +53,7 @@ function CreateQuestion() {
                 wrap="wrap"
                 placeholder="Enter your question here!"
                 height="100px"
+                onChange={handleChange}
               />
             </FormControl>
             <Button

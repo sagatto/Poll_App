@@ -52,8 +52,8 @@ const resolvers = {
       return { token, user };
     },
     // Add a new poll using args
-    addPoll: async (parent, { question }) => {
-      return await Poll.create(question);
+    addPoll: async (parent, args) => {
+      return await Poll.create(args);
     },
     // Add vote using poll id if user hasn't voted
     addUpVote: async (parent, {_id}, context) => {

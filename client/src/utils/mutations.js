@@ -13,7 +13,7 @@ export const LOGIN = gql`
 export const ADD_POLL = gql`
   mutation addPoll($question: String!) {
     addPoll(question: $question) {
-      question 
+      _id
     }
   }
 `;
