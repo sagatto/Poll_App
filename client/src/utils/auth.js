@@ -1,7 +1,6 @@
 import decode from 'jwt-decode';
 class AuthService {
   getProfile() {
-    console.log("frontend getprofile");
     return decode(this.getToken());
   }
 
