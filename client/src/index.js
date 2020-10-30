@@ -5,10 +5,8 @@ import {
     Heading,
     FormControl,
     FormLabel,
-    Input,
-    Button
+    Input
   } from '@chakra-ui/core';
-
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
