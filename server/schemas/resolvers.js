@@ -17,6 +17,10 @@ const resolvers = {
     allPolls: async () => {
       return Poll.find(); 
     },
+    // Return full list of Users from User table
+    allUsers: async () => {
+      return User.find();
+    },
     // Using user._id from context find list of polls they have voted on
     pollsVotedOn: async (parent, args, context) => {
       return await User.findById(context.user._id).populate(polls)
@@ -52,12 +56,12 @@ const resolvers = {
       return await Poll.create(question);
     },
     // Add vote using poll id if user hasn't voted
-    addUpVote: async (parent, {pollid}, context) => {
+    addUpVote: async (parent, {_id}, context) => {
       const pollList = await User.findById(context.user._id).populate(polls);
-
+      // db.users.find( { _id: ObjectId("5f9b71e41f4c656380ac7cc0"), polls: ObjectId("5f9b71e41f4c656380ac7cea") } )
       if(pollList) {
         for(i=0; i < pollList.length; i++){
-          if(pollid == pollList[i]._id){
+          if(_id == pollList[i]._id){
             return 
           }
         }
