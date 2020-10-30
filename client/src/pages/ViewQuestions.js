@@ -30,7 +30,7 @@ function ViewQuestions() {
             >
             <form>
               <Text>
-                How was the latest funding round ?{" "}
+                How was the latest funding round ?
               </Text>
               <Button
               type="submit"
