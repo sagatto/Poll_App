@@ -16,17 +16,16 @@ const typeDefs = gql`
     user: User
   }
   type Query {
-    userExist(email: String!): Boolean
     allPolls: [Poll]
     allUsers: [User]
-    pollsVotedOn: [Poll]
+    whoMe: User
   }
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(email: String!, password: String!): Auth
     addPoll(question: String!): Poll
-    addUpVote(_id: ID!): Poll
-    addDownVote(_id: ID!): Poll
+    addLike(_id: ID!): Poll
+    addDislike(_id: ID!): Poll
   }
 `;
 module.exports = typeDefs;
