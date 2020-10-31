@@ -6,7 +6,6 @@ const { User, Poll } = require("../models");
 const { signToken } = require("../utils/auth");
 // Debug enable
 const debug = 0;
-
 const resolvers = {
   Query: {
     // Return full list of Polls from Poll table
@@ -48,6 +47,7 @@ const resolvers = {
     },
     // Add vote using poll id if user hasn't voted
     addLike: async (parent, { _id }, context) => {
+      console.log("Adding like::");
       const userInfo = await User.findById(context.user._id);
       const userPolls = userInfo.polls;
       if (debug) {

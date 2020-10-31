@@ -10,7 +10,6 @@ import {
   FormControl,
   Textarea,
   FormLabel,
-  Input,
   Button,
 } from "@chakra-ui/core";
 // Debug enable
