@@ -27,3 +27,21 @@ export const ADD_USER = gql`
     }
   }
 `;
+export const LIKE = gql`
+mutation addLike($_id: ID!) {
+  addLike(_id: $_id){
+		_id
+    question
+    count
+  }
+}
+`;
+export const DISLIKE = gql`
+mutation addDislike($_id: ID!) {
+  addDislike(_id: $_id){
+		_id
+    question
+    count
+  }
+}
+`;
