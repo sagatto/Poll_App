@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
-import { StoreProvider } from "./utils/GlobalState";
 import ThemeToggler from "./components/ThemeToggler";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -31,7 +30,6 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <StoreProvider>
           <ThemeProvider theme={theme}>
             <ColorModeProvider>
               <CSSReset />
@@ -43,7 +41,6 @@ function App() {
               <Route exact path="/createquestion" component={CreateQuestion} />
             </ColorModeProvider>
           </ThemeProvider>
-        </StoreProvider>
       </Router>
     </ApolloProvider>
   );
