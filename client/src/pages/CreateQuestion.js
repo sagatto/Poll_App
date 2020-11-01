@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/react-hooks";
 import Auth from "../utils/auth";
 import { ADD_POLL } from "../utils/mutations";
@@ -13,7 +12,7 @@ import {
   Button,
 } from "@chakra-ui/core";
 // Debug enable
-const debug = 1;
+const debug = 0;
 function CreateQuestion() {
   const [formState, setFormState] = useState({ question: "" });
   const [addPoll] = useMutation(ADD_POLL);
@@ -21,11 +20,11 @@ function CreateQuestion() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
-      const mutationResponse = await addPoll({
+      await addPoll({
         variables: { question: formState.question },
       });
     } catch (e) {
-      console.log(e);
+      if(debug) console.log(e);
     }
   };
 
