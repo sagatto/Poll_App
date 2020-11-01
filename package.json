@@ -1,7 +1,8 @@
 {
   "name": "dory",
   "version": "1.0.0",
-  "description": "",
+  "description": "Q&A Platform",
+
   "main": "server/server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -12,8 +13,8 @@
     "heroku-postbuild": "cd client && npm run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sparsh Patwa",
+  "license": "MIT",
   "dependencies": {
     "if-env": "^1.0.4"
   },
