@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const secret = 'mysecretsshhhhh';
 const expiration = '10h';
 // Debug enable
-const debug = 1;
+const debug = 0;
 module.exports = {
   authMiddleware: function ({ req }) {
     // Token can be sent via req.body/query/headers
@@ -23,7 +23,7 @@ module.exports = {
       req.user = data;
     }
     catch {
-      console.log('Invalid token');
+      if(debug) console.log('Invalid token');
     }
 
     return req;

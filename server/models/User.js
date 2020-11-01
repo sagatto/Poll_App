@@ -14,12 +14,10 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    polls: [
-      {
-        type: Schema.Types.ObjectId,
+    polls: {
+        type: [Schema.Types.ObjectId],
         ref: 'Poll'
-      }
-    ],
+    },
   },
   {
     toJSON: {

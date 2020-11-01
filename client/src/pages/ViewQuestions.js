@@ -5,7 +5,7 @@ import {
   Heading,
 } from "@chakra-ui/core";
 import Auth from "../utils/auth";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import { ALL_POLLS } from "../utils/queries";
 import Question from "../components/Question";
 // Debug enable

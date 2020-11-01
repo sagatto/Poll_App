@@ -1,8 +1,11 @@
 {
   "name": "dory",
   "version": "1.0.0",
+  "description": "Q&A Platform",
   "private": true,
   "proxy": "http://localhost:3001",
+  "author": "Sparsh Patwa",
+  "license": "MIT",
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "@chakra-ui/core": "^0.8.0",
@@ -27,7 +30,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
