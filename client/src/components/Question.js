@@ -69,7 +69,7 @@ export default function Question({ _id, question, count = 0 }) {
           margin="3px"
           mt={4}
         >
-          Upvotes: {count}
+          Rank: {count}
         </Button>
       </form>
     </Box>
