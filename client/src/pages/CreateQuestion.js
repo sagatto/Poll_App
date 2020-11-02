@@ -24,7 +24,7 @@ function CreateQuestion() {
         variables: { question: formState.question },
       });
     } catch (e) {
-      if(debug) console.log(e);
+      if (debug) console.log(e);
     }
   };
 
@@ -38,48 +38,47 @@ function CreateQuestion() {
   return (
     <Flex width="full" align="center" justifyContent="center">
       {Auth.loggedIn() ? (
-        <div>
-          <Box
-            p={8}
-            maxWidth="80%"
-            borderWidth={1}
-            borderRadius={8}
-            boxShadow="lg"
-          >
-            <Box textAlign="center">
-              <Heading>Post a Question for the CEO</Heading>
-            </Box>
-            <Box my={4} textAlign="left">
-              <form onSubmit={handleFormSubmit}>
-                <FormControl>
-                  <FormLabel></FormLabel>
-                  <Textarea
-                    name="question"
-                    type="text"
-                    wrap="wrap"
-                    placeholder="Enter your question here!"
-                    height="100px"
-                    onChange={handleChange}
-                  />
-                </FormControl>
-                <Button
-                  type="submit"
-                  variantColor="purple"
-                  variant="outline"
-                  width="full"
-                  mt={4}
-                >
-                  Add Anonymously
-                </Button>
-              </form>
-            </Box>
+        <Box
+          p={8}
+          maxWidth="80%"
+          borderWidth={1}
+          borderRadius={8}
+          boxShadow="lg"
+        >
+          <Box textAlign="center">
+            <Heading>Post Questions to Dory</Heading>
           </Box>
-        </div>
+          <Box my={4} textAlign="center">
+            <form onSubmit={handleFormSubmit}>
+              <FormControl isRequired>
+                <FormLabel> Your Question: </FormLabel>
+                <Textarea
+                  name="question"
+                  type="text"
+                  wrap="wrap"
+                  placeholder="Enter your question here"
+                  height="100px"
+                  onChange={handleChange}
+                />
+              </FormControl>
+              <Button
+                type="submit"
+                variantColor="purple"
+                variant="outline"
+                width="full"
+                mt={4}
+              >
+                Add Anonymously
+              </Button>
+            </form>
+          </Box>
+        </Box>
       ) : (
-        <div>Login to Post a question to Dory</div>
+        <Box textAlign="center">
+          <Heading>Dory Login required to post a Question</Heading>
+        </Box>
       )}
     </Flex>
   );
 }
-
 export default CreateQuestion;

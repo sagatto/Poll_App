@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ViewQuestions from "./pages/ViewQuestions";
 import CreateQuestion from "./pages/CreateQuestion";
+import Auth from "./utils/auth";
 import {
   ThemeProvider,
   theme,
@@ -30,17 +31,26 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-          <ThemeProvider theme={theme}>
-            <ColorModeProvider>
-              <CSSReset />
-              <ThemeToggler />
+        <ThemeProvider theme={theme}>
+          <ColorModeProvider>
+            <CSSReset />
+            <ThemeToggler />
+            {/* Homepage redirection based on login status  */}
+            {Auth.loggedIn() ? (
+              <Route exact path="/" component={ViewQuestions} />
+            ) : (
               <Route exact path="/" component={Login} />
-              <Route exact path="/login" component={Login} />
+            )}
+            {/* Signup redirection based on login status  */}
+            {Auth.loggedIn() ? (
+              <Route exact path="/signup" component={ViewQuestions} />
+            ) : (
               <Route exact path="/signup" component={Signup} />
-              <Route exact path="/dory" component={ViewQuestions} />
-              <Route exact path="/createquestion" component={CreateQuestion} />
-            </ColorModeProvider>
-          </ThemeProvider>
+            )}
+            <Route exact path="/dory" component={ViewQuestions} />
+            <Route exact path="/createquestion" component={CreateQuestion} />
+          </ColorModeProvider>
+        </ThemeProvider>
       </Router>
     </ApolloProvider>
   );

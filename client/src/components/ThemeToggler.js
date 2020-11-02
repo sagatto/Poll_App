@@ -1,40 +1,47 @@
 import React from "react";
-import { useColorMode, Button, Link, Box, IconButton } from "@chakra-ui/core";
 import Auth from "../utils/auth";
+import { useColorMode, Button, Link, Box, IconButton } from "@chakra-ui/core";
 
 export default function ThemeToggler() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <Box textAlign="right" py={4} mr={12}>
       {Auth.loggedIn() ? (
-        <div>
-          <Link margin="2px" fontWeight="semibold" href="/dory">
+        <Box textAlign="right" py={4} mr={12}>
+          <Link margin="20px" fontWeight="bold" href="/dory">
             Dory
           </Link>
-          <Link margin="2px" fontWeight="semibold" href="/createquestion">
-            Question
+          <Link margin="20px" fontWeight="bold" href="/createquestion">
+            Post
           </Link>
-          <Button onClick={() => Auth.logout()} variant="ghost">
+          <Link margin="20px" fontWeight="bold" onClick={() => Auth.logout()}>
             Logout
-          </Button>
-        </div>
+          </Link>
+          <IconButton
+          icon={colorMode === "light" ? "moon" : "sun"}
+          onClick={toggleColorMode}
+          variant="ghost"
+          fontWeight="semibold"
+          margin="2px"
+        />
+        </Box>
       ) : (
-        <div>
-          <Link margin="2px" fontWeight="semibold" href="/login">
+        <Box textAlign="right" py={4} mr={12}>
+          <Link margin="20px" fontWeight="bold" href="/">
             Login
           </Link>
-          <Link margin="2px" fontWeight="semibold" href="/signup">
-            SignUp
+          <Link margin="20px" fontWeight="bold" href="/signup">
+            Signup
           </Link>
-        </div>
+          <IconButton
+          icon={colorMode === "light" ? "moon" : "sun"}
+          onClick={toggleColorMode}
+          variant="ghost"
+          fontWeight="semibold"
+          margin="2px"
+        />
+        </Box>
       )}
-      <IconButton
-        icon={colorMode === "light" ? "moon" : "sun"}
-        onClick={toggleColorMode}
-        variant="ghost"
-        fontWeight="semibold"
-        margin="2px"
-      />
     </Box>
   );
 }
