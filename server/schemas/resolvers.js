@@ -11,7 +11,7 @@ const resolvers = {
     // Return full list of Polls from Poll table
     allPolls: async () => {
       if(debug) console.log("allPolls() query");
-      return Poll.find();
+      return Poll.find().sort({count: -1});
     },
     // Return full list of Users from User table
     allUsers: async () => {

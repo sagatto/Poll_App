@@ -29,52 +29,49 @@ export default function Question({ _id, question, count = 0 }) {
     if (debug) console.log("MUTATION RESPONSE=>", mutationResponse);
   };
   return (
-    <div>
-      <Box
-        my={4}
-        textAlign="center"
-        p="8"
-        borderWidth={1}
-        borderRadius={8}
-        boxShadow="lg"
-      >
-        <form>
-          <Text>{_id}</Text>
-          <Text>{question}</Text>
-          <Button
-            type="submit"
-            variantColor="purple"
-            variant="outline"
-            width="25"
-            margin="3px"
-            mt={4}
-            onClick={(e) => handleLike(e)}
-          >
-            👍
-          </Button>
-          <Button
-            type="submit"
-            variantColor="purple"
-            variant="outline"
-            width="25"
-            margin="3px"
-            mt={4}
-            onClick={(e) => handleDislike(e)}
-          >
-            👎
-          </Button>
-          <Button
-            type="submit"
-            variantColor="purple"
-            variant="outline"
-            width="25"
-            margin="3px"
-            mt={4}
-          >
-            Upvotes: {count}
-          </Button>
-        </form>
-      </Box>
-    </div>
+    <Box
+      my={4}
+      textAlign="center"
+      p="8"
+      borderWidth={1}
+      borderRadius={8}
+      boxShadow="lg"
+    >
+      <form>
+        <Text>{question}</Text>
+        <Button
+          type="submit"
+          variantColor="purple"
+          variant="outline"
+          width="25"
+          margin="3px"
+          mt={4}
+          onClick={(e) => handleLike(e)}
+        >
+          👍
+        </Button>
+        <Button
+          type="submit"
+          variantColor="purple"
+          variant="outline"
+          width="25"
+          margin="3px"
+          mt={4}
+          onClick={(e) => handleDislike(e)}
+        >
+          👎
+        </Button>
+        <Button
+          type="submit"
+          variantColor="purple"
+          variant="outline"
+          width="25"
+          margin="3px"
+          mt={4}
+        >
+          Rank: {count}
+        </Button>
+      </form>
+    </Box>
   );
 }
