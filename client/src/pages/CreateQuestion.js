@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import Auth from "../utils/auth";
 import { ADD_POLL } from "../utils/mutations";
+import {useHistory} from "react-router-dom";
 import {
   Flex,
   Box,
@@ -16,6 +17,7 @@ const debug = 0;
 function CreateQuestion() {
   const [formState, setFormState] = useState({ question: "" });
   const [addPoll] = useMutation(ADD_POLL);
+  let history = useHistory();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -26,6 +28,7 @@ function CreateQuestion() {
     } catch (e) {
       if (debug) console.log(e);
     }
+    history.push('/dory');
   };
 
   const handleChange = (event) => {
@@ -34,6 +37,7 @@ function CreateQuestion() {
       ...formState,
       [name]: value,
     });
+
   };
   return (
     <Flex width="full" align="center" justifyContent="center">
