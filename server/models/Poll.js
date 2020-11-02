@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
-
 const pollSchema = new Schema(
   {
     question: {
@@ -14,16 +13,9 @@ const pollSchema = new Schema(
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
     },
-    // username: {
-    //   type: String,
-    //   required: true
-    // },
-    // email: {
-    //   type: String,
-    //   required: true
-    // },
     count: {
       type: Number,
+      default: 0
     }
   },
   {
@@ -32,8 +24,5 @@ const pollSchema = new Schema(
     }
   }
 );
-
-
 const Poll = model('Poll', pollSchema);
-
 module.exports = Poll;

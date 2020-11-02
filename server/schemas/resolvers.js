@@ -1,106 +1,128 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order } = require('../models');
-const { signToken } = require('../utils/auth');
-
+const {
+  AuthenticationError,
+  UserInputError,
+} = require("apollo-server-express");
+const { User, Poll } = require("../models");
+const { signToken } = require("../utils/auth");
+// Debug enable
+const debug = 0;
 const resolvers = {
   Query: {
-    me: async () => {
-      return await Category.find();
+    // Return full list of Polls from Poll table
+    allPolls: async () => {
+      if(debug) console.log("allPolls() query");
+      return Poll.find().sort({count: -1});
     },
-    products: async (parent, { category, name }) => {
-      const params = {};
-
-      if (category) {
-        params.category = category;
-      }
-
-      if (name) {
-        params.name = {
-          $regex: name
-        };
-      }
-
-      return await Product.find(params).populate('category');
+    // Return full list of Users from User table
+    allUsers: async () => {
+      if(debug) console.log("allUsers() query");
+      return User.find();
     },
-    product: async (parent, { _id }) => {
-      return await Product.findById(_id).populate('category');
+    // Using user._id from context find list of polls they have voted on
+    whoMe: async (parent, args, context) => {
+      if(debug) console.log("whoMe() query");
+      return await User.findById(context.user._id);
     },
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-        return user;
-      }
-
-      throw new AuthenticationError('Not logged in');
-    },
-    order: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        return user.orders.id(_id);
-      }
-
-      throw new AuthenticationError('Not logged in');
-    }
   },
   Mutation: {
+    // Authenticate user using email and password
+    login: async (parent, { email, password }) => {
+      if(debug) console.log("login() mutation");
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+      const correctPw = await user.isCorrectPassword(password);
+      if (!correctPw) {
+        throw new AuthenticationError("Incorrect credentials");
+      }
+      const token = signToken(user);
+      return { token, user };
+    },
+    // Add new user using args
     addUser: async (parent, args) => {
+      if(debug) console.log("addUser() mutation");
       const user = await User.create(args);
       const token = signToken(user);
-
       return { token, user };
     },
-    addOrder: async (parent, { products }, context) => {
-      console.log(context);
-      if (context.user) {
-        const order = new Order({ products });
-
-        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-        return order;
-      }
-
-      throw new AuthenticationError('Not logged in');
+    // Add a new poll using args
+    addPoll: async (parent, args) => {
+      if(debug) console.log("addPoll() mutation");
+      return await Poll.create(args);
     },
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+    // Add vote using poll id if user hasn't voted
+    addLike: async (parent, { _id }, context) => {
+      if(debug) console.log("addLike() mutation");
+      const userInfo = await User.findById(context.user._id);
+      const userPolls = userInfo.polls;
+      if (debug) {
+        console.log("User Info:", userInfo);
+        console.log("Polls user has voted on:", userPolls);
       }
-
-      throw new AuthenticationError('Not logged in');
+      const pollInfo = await Poll.findById(_id);
+      let pollCount = pollInfo.count;
+      if (debug) {
+        console.log("Poll Info:", pollInfo);
+        console.log("Poll Count:", pollCount);
+      }
+      if (userPolls.length != 0) {
+        for (i = 0; i < userPolls.length; i++) {
+          if (userPolls[i]._id == _id) {
+            if (debug) console.log("Vote already casted for :",_id);
+            return pollInfo;
+          }
+        }
+      }
+      if (debug) console.log("Casting vote for:",_id);
+      pollCount = pollCount + 1;
+      if (debug) console.log("Vote will be updated to:", pollCount);
+      let updatedPollInfo = await Poll.findByIdAndUpdate(_id, {
+        count: pollCount,
+      });
+      await User.findByIdAndUpdate(context.user._id, {
+        $addToSet: {polls: _id}
+      });
+      updatedPollInfo = await Poll.findById(_id);
+      updateUserPolls = await User.findById(context.user._id);
+      return updatedPollInfo;
     },
-    updateProduct: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
-
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-    },
-    login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
-
-      if (!user) {
-        throw new AuthenticationError('Incorrect credentials');
+    // Add vote using poll id if user hasn't voted
+    addDislike: async (parent, { _id }, context) => {
+      if(debug) console.log("addDislike() mutation");
+      const userInfo = await User.findById(context.user._id);
+      const userPolls = userInfo.polls;
+      if (debug) {
+        console.log("User Info:", userInfo);
+        console.log("Polls user has voted on:", userPolls);
       }
-
-      const correctPw = await user.isCorrectPassword(password);
-
-      if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+      const pollInfo = await Poll.findById(_id);
+      let pollCount = pollInfo.count;
+      if (debug) {
+        console.log("Poll Info:", pollInfo);
+        console.log("Poll Count:", pollCount);
       }
-
-      const token = signToken(user);
-
-      return { token, user };
+      if (userPolls.length != 0) {
+        for (i = 0; i < userPolls.length; i++) {
+          if (userPolls[i]._id == _id) {
+            if (debug) console.log("Vote already casted for :",_id);
+            return pollInfo;
+          }
+        }
+      }
+      if (debug) console.log("Casting vote for:",_id);
+      pollCount = pollCount - 1;
+      if (debug) console.log("Vote will be updated to:", pollCount);
+      let updatedPollInfo = await Poll.findByIdAndUpdate(_id, {
+        count: pollCount,
+      });
+      await User.findByIdAndUpdate(context.user._id, {
+        $addToSet: {polls: _id}
+      });
+      updatedPollInfo = await Poll.findById(_id);
+      updateUserPolls = await User.findById(context.user._id);
+      return updatedPollInfo;
     }
   }
 };
-
 module.exports = resolvers;

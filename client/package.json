@@ -1,8 +1,13 @@
 {
-  "name": "state-client",
-  "version": "0.1.0",
+  "name": "dory",
+  "version": "1.0.0",
+  "description": "Q&A Platform",
   "private": true,
+  "proxy": "http://localhost:3001",
+  "author": "Sparsh Patwa",
+  "license": "MIT",
   "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
@@ -11,9 +16,11 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "apollo-boost": "^0.4.9",
+    "apollo-boost-upload": "^1.0.1",
     "emotion-theming": "^10.0.27",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
+    "jwt-decode": "^3.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0",
@@ -23,7 +30,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

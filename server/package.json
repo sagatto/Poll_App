@@ -1,16 +1,15 @@
 {
   "name": "dory",
   "version": "1.0.0",
-  "description": "poll app",
+  "description": "Q&A Platform",
   "main": "server.js",
-
   "scripts": {
     "start": "node server.js",
     "watch": "nodemon",
     "seed": "node config/seeds.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Sparsh Patwa",
+  "license": "MIT",
   "dependencies": {
     "apollo-server-express": "^2.18.2",
     "bcrypt": "^5.0.0",
